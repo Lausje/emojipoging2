@@ -38,6 +38,24 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
         // geeft de verwachte output van de functie
     }
     
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        //bepaalt wat er gebeurt als je op een regel in de tabel tikt
+        tableView.deselectRow(at: indexPath, animated: true)
+        let beest = beestenbende[indexPath.row]
+        // het beest in de regel dat je selecteert is nu gedefinieerd als "beest"
+        performSegue(withIdentifier: "naarTweedeScherm", sender: beest)
+        // voert de Segue naar het tweede scherm uit.
+        
+    }
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        // het laatste ding dat dit scherm doet voor het nieuwe scherm geladen wordt
+        let UitlegVC = segue.destination as! UitlegViewController
+        // stel het tweede scherm in als bestemming van de verhuizing. we hebben nu een korte constante die de bestemming is.
+        UitlegVC.beest = sender as! String
+        // stel het beest waar je op hebt geklikt in als sender
+    }
+    
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
